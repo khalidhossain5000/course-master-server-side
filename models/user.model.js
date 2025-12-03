@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema(
       enum: ["student", "admin"],
       default: "student",
     },
+    avatar: {
+      type: String,
+      default : 'https://i.ibb.co.com/JFdJJ5F6/ndefault.jpg'
+    }
   },
   { timestamps: true }
 );

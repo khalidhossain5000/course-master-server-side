@@ -20,3 +20,19 @@ export const registerValidation = Joi.object({
     "any.required": "Password is required",
   }),
 });
+
+// login validation here
+export const loginValidation = Joi.object({
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required()
+    .messages({
+      "string.empty": "Email cannot be empty",
+      "string.email": "Please provide a valid email",
+      "any.required": "Email is required",
+    }),
+  password: Joi.string().required().messages({
+    "string.empty": "Password cannot be empty",
+    "any.required": "Password is required",
+  }),
+});
