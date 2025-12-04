@@ -162,7 +162,7 @@ export const refreshToken = async (req, res) => {
 
       // response
       res.json({
-        user: { id: user._id, name: user.name, email: user.email ,profileImage:user.avatar},
+        user: { id: user._id, name: user.name, email: user.email ,profileImage:user.avatar,role:user.role},
         accessToken,
       });
     });
@@ -172,4 +172,15 @@ export const refreshToken = async (req, res) => {
 };
 
 
-//
+//LOG OUT API STARTS HERE 
+
+export const logoutUser = (req, res) => {
+  res.clearCookie("refreshToken", {
+    httpOnly: true,
+    secure: false,  // dev mode
+    sameSite: "lax",
+    path: "/",
+  });
+
+  return res.status(200).json({ message: "Logged out successfully" });
+};
