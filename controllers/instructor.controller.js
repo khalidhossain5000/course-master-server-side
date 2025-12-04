@@ -28,3 +28,23 @@ const createInstructor = async (req, res) => {
 };
 
 export default createInstructor;
+
+
+
+
+// get all instructors
+export const getAllInstructors = async (req, res) => {
+  try {
+    const instructors = await Instructor.find(); // fetch all instructors
+    res.status(200).json({
+      success: true,
+      data: instructors,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+      error: err.message,
+    });
+  }
+};

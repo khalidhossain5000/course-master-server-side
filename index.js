@@ -5,6 +5,8 @@ import mongoose from 'mongoose';
 import authRoutes from './routes/auth.routes.js';
 import courseRoutes from './routes/course.route.js'
 import instructorRoutes from './routes/instructor.routes.js'
+import assignmentRoutes from './routes/assignment.route.js'
+import quizRoutes from './routes/quiz.routes.js'
 import cookieParser from 'cookie-parser';
 // Configure dotenv
 dotenv.config();
@@ -29,6 +31,11 @@ app.use("/api/courses", courseRoutes);
 
 //instrcurots
 app.use("/api/instructors", instructorRoutes);
+
+
+app.use("/api/assignments", assignmentRoutes);
+
+app.use("/api/quizzes", quizRoutes);
 
 //mongoose connection
 try {

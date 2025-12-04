@@ -19,6 +19,7 @@ const instructorSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    enrolledCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
   },
   { timestamps: true }
 );
