@@ -111,3 +111,76 @@ export const enrollCourse = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+
+
+
+
+// Mark a lesson as completed
+export const completeLesson = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const { courseId, lessonId } = req.body;
+
+    const enrollment = await Enrollment.findOne({ user: userId, course: courseId });
+    if (!enrollment) return res.status(404).json({ message: "Enrollment not found" });
+
+    // Already completed check
+    if (!enrollment.completedLessons.includes(lessonId)) {
+      enrollment.completedLessons.push(lessonId);
+
+      // Fetch total lessons from Course
+      const course = await Course.findById(courseId);
+      const totalLessons = course.lessons.length;
+
+      // Update progress percentage
+      enrollment.progress = Math.round((enrollment.completedLessons.length / totalLessons) * 100);
+
+      await enrollment.save();
+    }
+
+    res.status(200).json({ message: "Lesson completed", progress: enrollment.progress });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+export const getMyEnrollments = async (req, res) => {
+  try {
+
+    const userId = req.user._id;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+    const skip = (page - 1) * limit;
+
+    const total = await Enrollment.countDocuments({ user: userId });
+
+    const enrollments = await Enrollment.find({ user: userId })
+      .populate("course")
+      .skip(skip)
+      .limit(limit)
+      .exec();
+
+    res.status(200).json({ 
+      total,
+      page,
+      limit,
+      enrollments 
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};

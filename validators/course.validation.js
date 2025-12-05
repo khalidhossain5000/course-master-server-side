@@ -8,7 +8,7 @@ const courseValidation = Joi.object({
 
   price: Joi.when("isFree", {
     is: true,
-    then: Joi.valid(0).required(), // free হলে price = 0
+    then: Joi.valid(0), 
     otherwise: Joi.number().min(1).required(), // paid হলে minimum 1
   }),
 

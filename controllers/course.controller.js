@@ -5,6 +5,9 @@ import courseValidation from "../validators/course.validation.js";
 export const createCourse = async (req, res) => {
   try {
     console.log("REQ BODY:", req.body);
+      if (req.body.isFree) {
+      req.body.price = 0;
+    }
     // 1. validate incoming data
     const { error } = courseValidation.validate(req.body);
     console.log(error, "this is vlaidtaion eror");
