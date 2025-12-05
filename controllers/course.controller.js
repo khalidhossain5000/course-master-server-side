@@ -139,7 +139,41 @@ export const getAllCourses = async (req, res) => {
 };
 
 
+//upate course
+export const updateCourse = async (req, res) => {
+  try {
+    const { courseId } = req.params; 
+    const updateData = req.body; 
+console.log(updateData,'update data in ')
+    if (!courseId) {
+      return res.status(400).json({ message: "Course ID is required" });
+    }
 
+    // find course and update
+    const updatedCourse = await Course.findByIdAndUpdate(
+      courseId,
+      { $set: updateData },
+      { new: true, runValidators: true } 
+    );
+
+    if (!updatedCourse) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Course updated successfully",
+      data: updatedCourse,
+    });
+  } catch (error) {
+    console.error("Update Course Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to update course",
+      error: error.message,
+    });
+  }
+};
 
 // Delete Course Controller
 export const deleteCourse = async (req, res) => {
@@ -160,3 +194,6 @@ export const deleteCourse = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
+
+
+

@@ -1,39 +1,6 @@
 // import Quiz from "../models/quiz.model.js";
 
 
-// export const createQuiz = async (req, res) => {
-//   try {
-//     const quizData = req.body;
-
-//     const newQuiz = await Quiz.create(quizData);
-
-//     return res.status(201).json({
-//       success: true,
-//       message: "Quiz created successfully",
-//       data: newQuiz,
-//     });
-//   } catch (error) {
-//     console.error("Quiz Create Error:", error);
-
-//     return res.status(500).json({
-//       success: false,
-//       message: "Failed to create quiz",
-//     });
-//   }
-// };
-
-
-
-
-
-
-
-
-
-
-
-
-//new one 
 
 import Course from "../models/course.model.js";
 

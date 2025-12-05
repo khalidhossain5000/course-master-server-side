@@ -131,7 +131,7 @@ console.log(refreshToken,accessToken,'this is acres and ref token')
         id: user._id,
         name: user.name,
         email: user.email,
-        avatar: newUser.avatar 
+        avatar: user.avatar 
       },
     });
   } catch (err) {
@@ -157,7 +157,7 @@ export const refreshToken = async (req, res) => {
       const accessToken = jwt.sign(
         { userId: user._id, email: user.email },
         process.env.JWT_SECRET,
-        { expiresIn: "15m" }
+        { expiresIn: "1h" }
       );
 
       // response

@@ -1,58 +1,6 @@
 import Assignment from "../models/assignment.model.js";
 
 
-
-// // Create Assignment
-// export const createAssignment = async (req, res) => {
-//   try {
-//     const { title, description, dueDate, courseName,courseId } = req.body;
-// console.log(req.body,'this is req boyd here re')
-
-//     if (!title || !description || !dueDate || !courseName) {
-//       return res.status(400).json({ message: "All fields are required" });
-//     }
-
-//     // Check if course exists
-//     const existingCourse = await Course.findById(courseId);
-//     if (!existingCourse) {
-//       return res.status(404).json({ message: "Course not found" });
-//     }
-
-//     // Create Assignment
-//     const newAssignment = await Assignment.create({
-//       title,
-//       description,
-//       dueDate,
-//       courseId,
-//       courseName,
-
-//     });
-
-//     res.status(201).json({
-//       success: true,
-//       message: "Assignment created successfully",
-//       data: newAssignment,
-//     });
-//   } catch (err) {
-//     console.log(err)
-//     res.status(500).json({
-//       message: "Server Error",
-//       error: err.message,
-//     });
-//   }
-// };
-
-
-
-
-
-
-
-
-
-
-
-//newd
 import Course from "../models/course.model.js";
 
 export const createAssignment = async (req, res) => {
@@ -78,7 +26,7 @@ export const createAssignment = async (req, res) => {
     res.status(201).json({
       success: true,
       message: "Assignment added to course successfully",
-      data: newAssignment, // শুধু নতুন added assignment return
+      data: newAssignment, 
     });
   } catch (error) {
     console.error("Assignment Create Error:", error);
